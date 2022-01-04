@@ -7,6 +7,9 @@
     "ByteSkript",
     "bsk"
   ],
+  "scripts": {
+    "test": "echo \"No test specified\""
+  },
   "repository": "https://github.com/ByteSkript/Atom.io-Grammar",
   "license": "MIT",
   "engines": {
