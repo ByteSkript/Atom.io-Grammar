@@ -1,0 +1,163 @@
+scopeName: 'source.byteskript'
+fileTypes: [
+    'bsk'
+]
+name: 'ByteSkript'
+limitLineLength: true
+
+patterns: [
+    { include: '#lineComment' }
+    { include: '#blockComment' }
+    { include: '#function' }
+    { include: '#event' }
+    { include: '#trigger' }
+    { include: '#variables' }
+    { include: '#syntax' }
+    { include: '#keywords' }
+    { include: '#string' }
+]
+
+repository:
+    lineComment: {
+        name: 'comment.line.double-slash'
+        match: '//.*$'
+    }
+    blockComment: {
+        begin: '/\\*'
+        end: '\\*/'
+        name: 'comment.block'
+    }
+    keywords:
+        patterns: [
+            {
+                match: "(assert|run|set|add|remove|delete|exit|stop|return|throw|try|catch|break|continue|while|loop)"
+                captures:
+                    0: name: 'keyword.control'
+            }
+        ]
+    literals:
+        patterns: [
+            {
+                match: "(none|null|false|true)"
+                captures:
+                    0: name: 'keyword.control.literal'
+            }
+        ]
+    string:
+        patterns: [
+            {
+                begin: '"'
+                beginCaptures:
+                    0:
+                        name: 'punctuation.definition.string.begin'
+                end: '"'
+                endCaptures:
+                    0:
+                        name: 'punctuation.definition.string.end'
+                name: 'string.quoted.double'
+                patterns: [
+                    {
+                        match: '\\\\.'
+                        name: 'constant.character.escape'
+                    }
+                ]
+            }
+        ]
+    syntax:
+        patterns: [
+            {
+                match: "\\bsyntax(?=:)"
+                captures:
+                    0: name: 'keyword.type.syntax'
+            }
+            {
+                match: "\\b(effect): (.+)"
+                captures:
+                    # 0: name: 'keyword.type.syntax'
+                    1: name: 'keyword.type.effect'
+                    2: name: 'markup.bold'
+            }
+        ]
+    trigger:
+        patterns: [
+            {
+                match: "\\btrigger(?=:)"
+                captures:
+                    0: name: 'keyword.type.trigger'
+            }
+            {
+                match: "\\bverify(?=:)"
+                captures:
+                    0: name: 'keyword.type.verifier'
+            }
+        ]
+    event:
+        patterns: [
+            {
+                match: "^(on )(.+):"
+                captures:
+                  0: name: 'meta.event'
+                  1: name: 'keyword.type.event'
+                  2: name: 'entity.name.event'
+            }
+        ]
+    function:
+        patterns: [
+            {
+                match: "^(function )([^\\s\(\\n]+?):"
+                captures:
+                  0: name: 'meta.function'
+                  1: name: 'keyword.type.function'
+                  2: name: 'entity.name.function'
+            }
+            {
+
+                begin: "^(function )(\\S+?) ?\\("
+                beginCaptures:
+                  0: name: 'meta.function'
+                  1: name: 'keyword.type.function'
+                  2: name: 'entity.name.function'
+                end: "\\):"
+                patterns: [
+                  {
+                    include: '#parameters'
+                  }
+                ]
+            }
+        ]
+    variables:
+        patterns: [
+            {
+                match: '{(@)\\w+}'
+                captures:
+                    0: name: 'variable.other'
+                    1: name: 'storage.modifier'
+            }
+            {
+                match: '{(!)\\w+}'
+                captures:
+                    0: name: 'variable.other'
+                    1: name: 'storage.modifier'
+            }
+            {
+                match: '{(_)\\w+}'
+                captures:
+                    0: name: 'variable.other'
+                    1: name: 'storage.modifier'
+            }
+            {
+                match: '{\\w+}'
+                name: 'variable.other'
+            }
+        ]
+    parameters:
+        patterns: [
+            {
+                match: '\\w+'
+                name: 'variable.other'
+            }
+            {
+                match: ','
+                name: 'punctuation.separator.delimiter'
+            }
+        ]

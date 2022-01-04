@@ -1,0 +1,16 @@
+{
+  "name": "byteskript-syntax",
+  "version": "1.0.0",
+  "description": "Syntax highlighting and file support for ByteSkript.",
+  "keywords": [
+    "Skript",
+    "ByteSkript",
+    "bsk"
+  ],
+  "repository": "https://github.com/atom/byteskript-syntax",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+},
+  "dependencies": {}
+}
