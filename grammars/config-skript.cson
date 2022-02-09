@@ -1,0 +1,40 @@
+scopeName: 'source.config-skript'
+fileTypes: [
+    'csk'
+]
+name: 'ByteSkript Config'
+limitLineLength: true
+
+patterns: [
+    { include: '#lineComment' }
+    { include: '#blockComment' }
+    { include: '#entry' }
+    { include: '#event' }
+    { include: '#trigger' }
+    { include: '#variables' }
+    { include: '#syntax' }
+    { include: '#keywords' }
+    { include: '#string' }
+]
+
+repository:
+    lineComment: {
+        name: 'comment.line.double-slash'
+        match: '//.*$'
+    }
+    blockComment: {
+        begin: '/\\*'
+        end: '\\*/'
+        name: 'comment.block'
+    }
+    entry:
+        patterns: [
+            {
+                match: "^([\\w ]+)(:)(.+)"
+                captures:
+                    0: name: 'meta.entry'
+                    1: name: 'entity.name.key'
+                    2: name: 'markup.bold'
+                    3: name: 'storage.value'
+            }
+        ]
