@@ -30,7 +30,7 @@ repository:
     keywords:
         patterns: [
             {
-                match: "(assert|run|set|add|remove|delete|exit|stop|return|throw|try|catch|break|continue|while|loop)"
+                match: "\\b(assert|run|set|add|remove|delete|sleep|wake|exit|stop|return|throw|try|catch|break|continue|while|loop|monitor)\\b"
                 captures:
                     0: name: 'keyword.control'
             }
@@ -128,26 +128,12 @@ repository:
     variables:
         patterns: [
             {
-                match: '{(@)\\w+}'
+                match: '({)([@!_])?\\w+(})'
                 captures:
                     0: name: 'variable.other'
-                    1: name: 'storage.modifier'
-            }
-            {
-                match: '{(!)\\w+}'
-                captures:
-                    0: name: 'variable.other'
-                    1: name: 'storage.modifier'
-            }
-            {
-                match: '{(_)\\w+}'
-                captures:
-                    0: name: 'variable.other'
-                    1: name: 'storage.modifier'
-            }
-            {
-                match: '{\\w+}'
-                name: 'variable.other'
+                    1: name: 'markup.bold'
+                    2: name: 'markup.underline'
+                    3: name: 'markup.bold'
             }
         ]
     parameters:
